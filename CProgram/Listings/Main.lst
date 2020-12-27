@@ -1,0 +1,88 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              11/03/2020 13:15:35 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\Main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Main.c OPTIMIZE(1,SPEED) BROWSE DEBUG OBJECTEXTEND CODE PRINT(.\Listings
+                    -\Main.lst) TABS(2) OBJECT(.\Objects\Main.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          
+   3            char bdata mem;  
+   4            sbit x1 = mem^0;  
+   5            sbit x2 = mem^1;
+   6            sbit x3 = mem^2;
+   7            sbit x4 = mem^3;
+   8            sbit z = P1^0;
+   9          
+  10            main() {   
+  11   1          
+  12   1          for(mem = 0; mem < 8; mem++){
+  13   2            P1<<=1; z = (x1 | ~x3 & x4) & (~x1 | x2);
+  14   2          }
+  15   1          return 0;
+  16   1          
+  17   1        }
+C51 COMPILER V9.60.0.0   MAIN                                                              11/03/2020 13:15:35 PAGE 2   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 10
+                                           ; SOURCE LINE # 12
+0000 750000      R     MOV     mem,#00H
+0003         ?C0001:
+0003 AF00        R     MOV     R7,mem
+0005 EF                MOV     A,R7
+0006 33                RLC     A
+0007 95E0              SUBB    A,ACC
+0009 FE                MOV     R6,A
+000A C3                CLR     C
+000B EF                MOV     A,R7
+000C 9408              SUBB    A,#08H
+000E EE                MOV     A,R6
+000F 6480              XRL     A,#080H
+0011 9480              SUBB    A,#080H
+0013 501C              JNC     ?C0002
+                                           ; SOURCE LINE # 13
+0015 E590              MOV     A,P1
+0017 25E0              ADD     A,ACC
+0019 F590              MOV     P1,A
+001B A200        R     MOV     C,x4
+001D B000        R     ANL     C,/x3
+001F 7200        R     ORL     C,x1
+0021 C0D0              PUSH    PSW
+0023 A200        R     MOV     C,x2
+0025 A000        R     ORL     C,/x1
+0027 D0F0              POP     B
+0029 82F7              ANL     C,B.7
+002B 9290              MOV     z,C
+                                           ; SOURCE LINE # 14
+002D 0500        R     INC     mem
+002F 80D2              SJMP    ?C0001
+0031         ?C0002:
+                                           ; SOURCE LINE # 15
+0031 E4                CLR     A
+0032 7E00              MOV     R6,#00H
+0034 7F00              MOV     R7,#00H
+                                           ; SOURCE LINE # 17
+0036 22                RET     
+             ; FUNCTION main (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     55    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
